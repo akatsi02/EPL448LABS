@@ -1,3 +1,4 @@
+package Lab2;
 import java.io.IOException;
 import java.util.*;
         
@@ -18,20 +19,14 @@ public class Exercise0 {
         
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         String line = value.toString();
-//        StringTokenizer tokenizer = new StringTokenizer(line);
-//        while (tokenizer.hasMoreTokens()) {
-//            word.set(tokenizer.nextToken());
-//            context.write(word, one);
-//        }
+
         String[] fields = line.split(",");
         String country = fields[7];
         int amount = Integer.parseInt(fields[2]);
         
         keyOut = new Text(country);
         valOut = new IntWritable(amount);
-        	
-        // System.out.printf("%s => %d\n", keyOut, valOut.get());
-        
+        	        
         context.write(keyOut, valOut);
         
     }
@@ -41,11 +36,6 @@ public class Exercise0 {
 
     public void reduce(Text key, Iterable<IntWritable> values, Context context) 
     		throws IOException, InterruptedException {
-//        int sum = 0;
-//        for (IntWritable val : values) {
-//        	sum += val.get();
-//        }
-//        context.write(key, new IntWritable(sum));
     	
     	int numProducts = 0;
     	int sumAmount = 0;
@@ -55,8 +45,6 @@ public class Exercise0 {
     		sumAmount += v.get();
     	}
     	String vOut = String.format("%d %d", numProducts, sumAmount);
-
-//    	System.out.printf("%s => %s\n", key, vOut);
     	
     	context.write(key, new Text(vOut));
     	
