@@ -14,8 +14,8 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 public class Exercise0 {
         
  public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
-    private IntWritable valOut; // = new IntWritable(1);
-    private Text keyOut; // = new Text();
+    private IntWritable valOut; 
+    private Text keyOut;
         
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         String line = value.toString();
